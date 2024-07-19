@@ -82,3 +82,44 @@ digiback.post("/login", (req, res) => {
       }
    );
 });
+
+// Armazenando API no banco de dados
+app.get("/load-digimons", authenticateToken, async (req, res) => {
+   try {
+      const response = await axios.get(
+         "https://digimon-api.vercel.app/api/digimon"
+      );
+      const digimons = response.data;
+
+      digimons.forEach((digimon) => insertDigimon(digimon));
+
+      res.send("Armazenamento realizado com sucesso!");
+   } catch (error) {
+      console.error(error);
+      res.status(500).send("Erro ao carregar Digimons.");
+   }
+});
+
+// Filtrar Digimons por level
+app.get("/digimons/level/:level", authenticateToken, (req, res) => {
+   const level = req.params.level;
+   db.all("SELECT * FROM digimons WHERE level = ?", [level], (err, rows) => {
+      if (err) {
+         res.status(500).send("Erro ao buscar Digimons.");
+         return;
+      }
+      res.json(rows);
+   });
+});
+
+// Filtrar digimons por nome
+app.get("/digimons/name/:name", authenticateToken, (req, res) => {
+   const name = req.params.name;
+   db.all("SELECT * FROM digimons WHERE name = ?", [name], (err, rows) => {
+      if (err) {
+         res.status(500).send("Erro ao buscar Digimons.");
+         return;
+      }
+      res.json(rows);
+   });
+});
