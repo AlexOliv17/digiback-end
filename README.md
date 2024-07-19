@@ -65,7 +65,7 @@ SQLite (embutido no projeto, não requer instalação separada)
 ❗ Retorna todos os Digimons com o nível especificado.
 
 
- 👉Filtrar Digimons por nome
+ 👉Filtrar Digimons por nome<br/>
   ➖ Método: GET<br/>
   ➖ URL: http://localhost:3000/digimons/name/:name<br/>
   ➖ Parâmetro de URL: name (o nome do Digimon, como "Agumon")<br/>
