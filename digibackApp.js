@@ -17,10 +17,3 @@ digiback.use(express.json());
 
 //Configurando o Database
 const db = new sqlite3.Database(":memory:");
-
-//Criando a tabela de Digimons
-db.serialize(() => {
-   db.run(
-      "CREATE TABLE digimons (id INTEGER PRIMARY KEY, name TEXT, img TEXT, level TEXT)"
-   );
-});
