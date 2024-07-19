@@ -84,7 +84,7 @@ digiback.post("/login", (req, res) => {
 });
 
 // Armazenando API no banco de dados
-app.get("/load-digimons", authenticateToken, async (req, res) => {
+digiback.get("/load-digimons", authenticateToken, async (req, res) => {
    try {
       const response = await axios.get(
          "https://digimon-api.vercel.app/api/digimon"
@@ -101,7 +101,7 @@ app.get("/load-digimons", authenticateToken, async (req, res) => {
 });
 
 // Filtrar Digimons por level
-app.get("/digimons/level/:level", authenticateToken, (req, res) => {
+digiback.get("/digimons/level/:level", authenticateToken, (req, res) => {
    const level = req.params.level;
    db.all("SELECT * FROM digimons WHERE level = ?", [level], (err, rows) => {
       if (err) {
@@ -113,7 +113,7 @@ app.get("/digimons/level/:level", authenticateToken, (req, res) => {
 });
 
 // Filtrar digimons por nome
-app.get("/digimons/name/:name", authenticateToken, (req, res) => {
+digiback.get("/digimons/name/:name", authenticateToken, (req, res) => {
    const name = req.params.name;
    db.all("SELECT * FROM digimons WHERE name = ?", [name], (err, rows) => {
       if (err) {
@@ -126,7 +126,7 @@ app.get("/digimons/name/:name", authenticateToken, (req, res) => {
 
 // Executando e iniciando o servidor
 seedDatabase().then(() => {
-   app.listen(PORT, () => {
+   digiback.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
    });
 });
