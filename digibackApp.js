@@ -123,3 +123,18 @@ app.get("/digimons/name/:name", authenticateToken, (req, res) => {
       res.json(rows);
    });
 });
+
+// Executando e iniciando o servidor
+seedDatabase().then(() => {
+   app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+   });
+});
+
+const insertDigimon = (digimon) => {
+   const stmt = db.prepare(
+      "INSERT INTO digimons (name, img, level) VALUES (?, ?, ?)"
+   );
+   stmt.run(digimon.name, digimon.img, digimon.level);
+   stmt.finalize();
+};
