@@ -32,7 +32,7 @@ SQLite (embutido no projeto, não requer instalação separada)
  👉Execute o script de seed: "node seed.js"
 
 ## Execução
- 👉Inicie o servidor: "node app.js" <br/>
+ 👉Inicie o servidor: "node digibackApp.js" <br/>
 
    ➖ O servidor estará disponível em http://localhost:3000.
 
